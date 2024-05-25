@@ -7,6 +7,14 @@ class Graph:
         self.graph = nx.MultiDiGraph()
         self.messages = messages
 
+    def updateNodeSentiment(self, message):
+        node = self.graph.nodes[message[Messages.UID]]
+        node[NodeAttributes.SENTIMENT_COUNT] += 1
+        node[NodeAttributes.SENTIMENT_SUM] += message[Messages.SENTIMENT_SCORE]
+        node[NodeAttributes.SENTIMENT] = (
+            node[NodeAttributes.SENTIMENT_SUM] / node[NodeAttributes.SENTIMENT_COUNT]
+        )
+
     def create_node(self, message):
         self.graph.add_node(
             message[Messages.UID],
@@ -18,32 +26,6 @@ class Graph:
             size=13,
             color="#e8e8e8",
         )
-
-    def updateNodeSentiment(self, message):
-        node = self.graph.nodes[message[Messages.UID]]
-        node[NodeAttributes.SENTIMENT_COUNT] += 1
-        node[NodeAttributes.SENTIMENT_SUM] += message[Messages.SENTIMENT_SCORE]
-        node[NodeAttributes.SENTIMENT] = (
-            node[NodeAttributes.SENTIMENT_SUM] / node[NodeAttributes.SENTIMENT_COUNT]
-        )
-
-    def create_edge(self, fromId, toId):
-        self.graph.add_edge(fromId, toId, totalSentiment=0, sentiment=0, messages=[])
-
-    def updateEdgeAttributes(self, edge, message):
-        edge[EdgeAttributes.MESSAGES].append(message)
-        edge[EdgeAttributes.TOTAL_SENTIMENT] += message[Messages.SENTIMENT_SCORE]
-        edge[EdgeAttributes.SENTIMENT] = edge[EdgeAttributes.TOTAL_SENTIMENT] / len(
-            edge[EdgeAttributes.MESSAGES]
-        )
-
-        edge_type = "natural"
-        if message[EdgeAttributes.SENTIMENT] >= 0.3:
-            edge_type = "positive"
-        elif message[EdgeAttributes.SENTIMENT] <= -0.3:
-            edge_type = "negative"
-
-        edge[EdgeAttributes.TYPE] = edge_type
 
     def create_graph(self):
         if (
@@ -59,14 +41,19 @@ class Graph:
             if i == 0:  # handle edge cases
                 continue
 
-            if not self.graph.has_edge(
-                self.messages[i - 1][Messages.UID], self.messages[i][Messages.UID]
-            ):
-                self.create_edge(
-                    self.messages[i - 1][Messages.UID], self.messages[i][Messages.UID]
-                )
+            edge_type = "natural"
+            if message[Messages.SENTIMENT_SCORE] >= 0.3:
+                edge_type = "positive"
+            elif message[Messages.SENTIMENT_SCORE] <= -0.3:
+                edge_type = "negative"
 
-            self.updateEdgeAttributes(self.messages[i - 1])
+            self.graph.add_edge(
+                self.messages[i][Messages.UID],
+                self.messages[i - 1][Messages.UID],
+                sentiment=message[Messages.SENTIMENT_SCORE],
+                type=edge_type,
+                text=message[Messages.TEXT],
+            )
 
         degrees = nx.degree(self.graph)
         eccentricity = nx.eccentricity(self.graph)
