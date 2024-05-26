@@ -1,4 +1,5 @@
 import networkx as nx
+
 from constants import Messages, NodeAttributes, EdgeAttributes, GraphAttributes
 
 
@@ -59,7 +60,7 @@ class Graph:
         eccentricity = nx.eccentricity(self.graph)
         betweenness_centrality = nx.betweenness_centrality(self.graph)
         closeness_centrality = nx.closeness_centrality(self.graph)
-        eigen_centrality = nx.eigenvector_centrality(self.graph)
+        # eigen_centrality = nx.eigenvector_centrality(self.graph)
         page_rank = nx.pagerank(self.graph)
         for node in self.graph.nodes:
             self.graph.nodes[node][NodeAttributes.DEGREE] = degrees[node]
@@ -70,9 +71,9 @@ class Graph:
             self.graph.nodes[node][NodeAttributes.CLOSENESS_CENTRALITY] = (
                 closeness_centrality[node]
             )
-            self.graph.nodes[node][NodeAttributes.EIGENCENTRALITY] = eigen_centrality[
-                node
-            ]
+            # self.graph.nodes[node][NodeAttributes.EIGENCENTRALITY] = eigen_centrality[
+            #     node
+            # ]
             self.graph.nodes[node][NodeAttributes.PAGERANK] = page_rank[node]
 
         # out_degrees = list(self.graph.out_degree())
@@ -82,12 +83,12 @@ class Graph:
         self.graph.graph[GraphAttributes.RADIUS] = nx.radius(self.graph)
         self.graph.graph[GraphAttributes.DENSITY] = nx.density(self.graph)
         self.graph.graph[GraphAttributes.RECIPROCITY] = nx.reciprocity(self.graph)
-        self.graph.graph[GraphAttributes.TRANSITIVITY] = nx.transitivity(self.graph)
-        self.graph.graph[GraphAttributes.AVERAGE_CLUSTERING] = nx.average_clustering(
-            self.graph
-        )
-        nx.average_degree_connectivity(self.graph)
-        nx.path_graph(self.graph)
+        # self.graph.graph[GraphAttributes.TRANSITIVITY] = nx.transitivity(self.graph)
+        # self.graph.graph[GraphAttributes.AVERAGE_CLUSTERING] = nx.average_clustering(
+        #     self.graph
+        # )
+        # nx.average_degree_connectivity(self.graph)
+        self.graph.graph[GraphAttributes.PATH_LENGTH] = len(nx.path_graph(self.graph).edges)
 
         self.graph.graph[GraphAttributes.POSITIVE_EDGES] = len(
             [
