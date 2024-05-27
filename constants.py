@@ -38,10 +38,12 @@ class GraphAttributes:
     RECIPROCITY = "reciprocity"
     TRANSITIVITY = "transitivity"
     AVERAGE_CLUSTERING = "averageClustering"
+    AVERAGE_DEGREE_CONNECTIVITY = "averageDegreeConnectivity"
+    PATH_LENGTH = "pathLength"
+
 
 class EdgeAttributes:
     SENTIMENT = "sentiment"
     TYPE = "type"
     TOTAL_SENTIMENT = "totalSentiment"
     MESSAGES = "messages"
-
