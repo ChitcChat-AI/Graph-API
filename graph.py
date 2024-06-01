@@ -19,7 +19,7 @@ class Graph:
             color="#e8e8e8",
         )
 
-    def updateNodeSentiment(self, message):
+    def updateNode(self, message):
         node = self.graph.nodes[message[Messages.UID]]
         node[NodeAttributes.SENTIMENT_COUNT] += 1
         node[NodeAttributes.SIZE] += 1
@@ -29,6 +29,12 @@ class Graph:
         node[NodeAttributes.SENTIMENT] = round(
             node[NodeAttributes.SENTIMENT_SUM] / node[NodeAttributes.SENTIMENT_COUNT], 2
         )
+        if node[NodeAttributes.SENTIMENT] >= 0.3:
+            node[NodeAttributes.COLOR] = "#77bf38"
+        elif node[NodeAttributes.SENTIMENT] <= -0.3:
+            node[NodeAttributes.COLOR] = "#fb8281"
+        else:
+            node[NodeAttributes.COLOR] = "#e8e8e8"
 
     def create_edge(self, fromId, toId):
         self.graph.add_edge(
@@ -63,7 +69,7 @@ class Graph:
         for message, i in zip(self.messages, range(len(self.messages))):
             if message[Messages.UID] not in self.graph:
                 self.create_node(message)
-            self.updateNodeSentiment(message)
+            self.updateNode(message)
 
             if i == 0:  # handle edge cases
                 continue
