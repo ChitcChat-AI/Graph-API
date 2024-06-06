@@ -1,53 +1,54 @@
 import networkx as nx
+from networkx import NetworkXError
 from constants import Messages, NodeAttributes, EdgeAttributes, GraphAttributes
 
 
 def get_transitivity(graph):
     try:
         return round(nx.transitivity(graph), 2)
-    except Exception:
+    except NetworkXError:
         return 0
 
 
 def get_path_length(graph):
     try:
         return len(nx.path_graph(graph))
-    except Exception:
+    except NetworkXError:
         return "Infinite"
 
 
 def get_average_clustering(graph):
     try:
         return round(nx.average_clustering(graph), 2)
-    except Exception:
+    except NetworkXError:
         return 0
 
 
 def get_reciprocity(graph):
     try:
         return round(nx.reciprocity(graph), 2)
-    except Exception:
+    except NetworkXError:
         return 0
 
 
 def get_density(graph):
     try:
         return round(nx.density(graph), 2)
-    except Exception:
+    except NetworkXError:
         return 0
 
 
 def get_radius(graph):
     try:
         return round(nx.radius(graph), 2)
-    except Exception:
+    except NetworkXError:
         return 0
 
 
 def get_diameter(graph):
     try:
         return round(nx.diameter(graph), 2)
-    except Exception:
+    except NetworkXError:
         return 0
 
 
