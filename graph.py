@@ -1,17 +1,7 @@
 import networkx as nx
-from constants import Messages, NodeAttributes, EdgeAttributes, GraphAttributes
+from constants import Messages, NodeAttributes, EdgeAttributes
 from graph_attributes import (
     add_graph_attributes,
-    get_average_clustering,
-    get_density,
-    get_diameter,
-    get_natural_edges,
-    get_negative_edges,
-    get_path_length,
-    get_positive_edges,
-    get_radius,
-    get_reciprocity,
-    get_transitivity,
 )
 from nodes_attributes import add_nodes_attributes
 
