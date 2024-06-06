@@ -1,5 +1,9 @@
 import networkx as nx
-from constants import Messages, NodeAttributes, EdgeAttributes, GraphAttributes
+from constants import Messages, NodeAttributes, EdgeAttributes
+from graph_attributes import (
+    add_graph_attributes,
+)
+from nodes_attributes import add_nodes_attributes
 
 
 class Graph:
@@ -88,75 +92,7 @@ class Graph:
                 self.messages[i - 1],
             )
 
-        degrees = nx.degree(self.graph)
-        eccentricity = nx.eccentricity(self.graph)
-        betweenness_centrality = nx.betweenness_centrality(self.graph)
-        closeness_centrality = nx.closeness_centrality(self.graph)
-        eigen_centrality = nx.eigenvector_centrality(self.graph)
-        page_rank = nx.pagerank(self.graph)
-        for node in self.graph.nodes:
-            self.graph.nodes[node][NodeAttributes.DEGREE] = degrees[node]
-            self.graph.nodes[node][NodeAttributes.ECCENTRICITY] = eccentricity[node]
-            self.graph.nodes[node][NodeAttributes.BETWEENNESS_CENTRALITY] = round(
-                betweenness_centrality[node], 2
-            )
-            self.graph.nodes[node][NodeAttributes.CLOSENESS_CENTRALITY] = round(
-                closeness_centrality[node], 2
-            )
-            self.graph.nodes[node][NodeAttributes.EIGENCENTRALITY] = round(
-                eigen_centrality[node], 2
-            )
-            self.graph.nodes[node][NodeAttributes.PAGERANK] = round(page_rank[node], 2)
-
-        out_degrees = list(self.graph.out_degree())
-        for out_degree in out_degrees:
-            self.graph.nodes[out_degree[0]][NodeAttributes.OUT_DEGREE] = out_degree[1]
-        self.graph.graph[GraphAttributes.DIAMETER] = nx.diameter(self.graph)
-        self.graph.graph[GraphAttributes.RADIUS] = nx.radius(self.graph)
-        self.graph.graph[GraphAttributes.DENSITY] = round(nx.density(self.graph), 2)
-        self.graph.graph[GraphAttributes.RECIPROCITY] = round(
-            nx.reciprocity(self.graph), 2
-        )
-        self.graph.graph[GraphAttributes.TRANSITIVITY] = round(
-            nx.transitivity(self.graph), 2
-        )
-        self.graph.graph[GraphAttributes.PATH_LENGTH] = len(nx.path_graph(self.graph))
-        self.graph.graph[GraphAttributes.AVERAGE_CLUSTERING] = round(
-            nx.average_clustering(self.graph), 2
-        )
-
-        self.graph.graph[GraphAttributes.POSITIVE_EDGES] = round(
-            len(
-                [
-                    edge
-                    for edge in self.graph.edges(data=True)
-                    if edge[2][EdgeAttributes.TYPE] == "positive"
-                ]
-            )
-            / len(self.graph.edges),
-            2,
-        )
-        self.graph.graph[GraphAttributes.NEGATIVE_EDGES] = round(
-            len(
-                [
-                    edge
-                    for edge in self.graph.edges(data=True)
-                    if edge[2][EdgeAttributes.TYPE] == "negative"
-                ]
-            )
-            / len(self.graph.edges),
-            2,
-        )
-        self.graph.graph[GraphAttributes.NATURAL_EDGES] = round(
-            len(
-                [
-                    edge
-                    for edge in self.graph.edges(data=True)
-                    if edge[2][EdgeAttributes.TYPE] == "natural"
-                ]
-            )
-            / len(self.graph.edges),
-            2,
-        )
+        add_nodes_attributes(self.graph)
+        add_graph_attributes(self.graph)
 
         return nx.readwrite.json_graph.node_link_data(self.graph)
