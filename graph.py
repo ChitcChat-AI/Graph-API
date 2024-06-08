@@ -58,9 +58,9 @@ class Graph:
             messages=[],
         )
 
-    def updateEdgeAttributes(self, edge, newEdge):
-        edge[EdgeAttributes.MESSAGES].append(newEdge[Messages.TEXT])
-        edge[EdgeAttributes.TOTAL_SENTIMENT] += newEdge[Messages.SENTIMENT_SCORE]
+    def updateEdgeAttributes(self, edge, newMessage):
+        edge[EdgeAttributes.MESSAGES].append(newMessage[Messages.TEXT])
+        edge[EdgeAttributes.TOTAL_SENTIMENT] += newMessage[Messages.SENTIMENT_SCORE]
         edge[EdgeAttributes.SENTIMENT] = edge[EdgeAttributes.TOTAL_SENTIMENT] / len(
             edge[EdgeAttributes.MESSAGES]
         )
@@ -104,17 +104,17 @@ class Graph:
                 continue
 
             if not self.graph.has_edge(
-                self.messages[i - 1][Messages.UID], self.messages[i][Messages.UID]
+                self.messages[i][Messages.UID], self.messages[i - 1][Messages.UID]
             ):
                 self.create_edge(
-                    self.messages[i - 1][Messages.UID], self.messages[i][Messages.UID]
+                    self.messages[i][Messages.UID], self.messages[i - 1][Messages.UID]
                 )
 
             self.updateEdgeAttributes(
                 self.graph.edges[
-                    self.messages[i - 1][Messages.UID], self.messages[i][Messages.UID]
+                    self.messages[i][Messages.UID], self.messages[i - 1][Messages.UID]
                 ],
-                self.messages[i - 1],
+                self.messages[i],
             )
 
         add_nodes_attributes(self.graph)
