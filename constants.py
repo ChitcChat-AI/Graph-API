@@ -22,7 +22,6 @@ class NodeAttributes:
     OPINION_AFTER = "opinionAfter"
     BETWEENNESS_CENTRALITY = "betweennessCentrality"
     CLOSENESS_CENTRALITY = "closenessCentrality"
-    DEGREE_CENTRALITY = "degreeCentrality"
     EIGENCENTRALITY = "EigenCentrality"
     PAGERANK = "PageRank"
 

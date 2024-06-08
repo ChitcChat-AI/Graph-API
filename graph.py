@@ -23,6 +23,13 @@ class Graph:
             sentimentCount=0,
             size=13,
             color="#e8e8e8",
+            degree=0,
+            outDegree=0,
+            eccentricity=0,
+            betweennessCentrality=0,
+            closenessCentrality=0,
+            EigenCentrality=0,
+            PageRank=0,
         )
 
     def updateNode(self, message):
