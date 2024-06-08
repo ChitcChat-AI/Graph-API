@@ -101,6 +101,12 @@ def add_graph_attributes(graph):
     graph.graph[GraphAttributes.TRANSITIVITY] = get_transitivity(graph)
     graph.graph[GraphAttributes.PATH_LENGTH] = get_path_length(graph)
     graph.graph[GraphAttributes.AVERAGE_CLUSTERING] = get_average_clustering(graph)
-    graph.graph[GraphAttributes.POSITIVE_EDGES] = get_positive_edges(graph)
-    graph.graph[GraphAttributes.NEGATIVE_EDGES] = get_negative_edges(graph)
-    graph.graph[GraphAttributes.NATURAL_EDGES] = get_natural_edges(graph)
+
+    if len(graph.edges) > 0:
+        graph.graph[GraphAttributes.POSITIVE_EDGES] = get_positive_edges(graph)
+        graph.graph[GraphAttributes.NEGATIVE_EDGES] = get_negative_edges(graph)
+        graph.graph[GraphAttributes.NATURAL_EDGES] = get_natural_edges(graph)
+    else:
+        graph.graph[GraphAttributes.POSITIVE_EDGES] = 0
+        graph.graph[GraphAttributes.NEGATIVE_EDGES] = 0
+        graph.graph[GraphAttributes.NATURAL_EDGES] = 0
