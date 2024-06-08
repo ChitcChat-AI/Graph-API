@@ -64,6 +64,10 @@ class Graph:
             edge[EdgeAttributes.TYPE] = "natural"
 
     def create_graph(self):
+        # check if there are messages
+        if len(self.messages) == 0:
+            return nx.readwrite.json_graph.node_link_data(self.graph)
+
         if (
             self.messages[0][Messages.UID]
             == "RPLkPefjRdQ3WL3prDMQLTtwjZ02"  # ChitChat id
