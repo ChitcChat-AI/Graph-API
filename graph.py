@@ -1,5 +1,5 @@
 import networkx as nx
-from constants import Messages, NodeAttributes, EdgeAttributes
+from constants import Messages, NodeAttributes, EdgeAttributes, GraphAttributes
 from graph_attributes import (
     add_graph_attributes,
 )
@@ -10,6 +10,8 @@ class Graph:
     def __init__(self, messages):
         self.graph = nx.DiGraph()
         self.messages = messages
+
+        self.set_graph_attributes()
 
     def create_node(self, message):
         self.graph.add_node(
@@ -62,6 +64,18 @@ class Graph:
             edge[EdgeAttributes.TYPE] = "negative"
         else:
             edge[EdgeAttributes.TYPE] = "natural"
+
+    def set_graph_attributes(self):
+        self.graph.graph[GraphAttributes.DIAMETER] = 0
+        self.graph.graph[GraphAttributes.RADIUS] = 0
+        self.graph.graph[GraphAttributes.DENSITY] = 0
+        self.graph.graph[GraphAttributes.RECIPROCITY] = 0
+        self.graph.graph[GraphAttributes.TRANSITIVITY] = 0
+        self.graph.graph[GraphAttributes.PATH_LENGTH] = 0
+        self.graph.graph[GraphAttributes.AVERAGE_CLUSTERING] = 0
+        self.graph.graph[GraphAttributes.POSITIVE_EDGES] = 0
+        self.graph.graph[GraphAttributes.NEGATIVE_EDGES] = 0
+        self.graph.graph[GraphAttributes.NATURAL_EDGES] = 0
 
     def create_graph(self):
         # check if there are messages
