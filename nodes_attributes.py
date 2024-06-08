@@ -83,6 +83,6 @@ def add_nodes_attributes(graph):
         if page_rank:
             graph.nodes[node][NodeAttributes.PAGERANK] = round(page_rank[node], 2)
 
-    out_degrees = get_out_degree()
+    out_degrees = get_out_degree(graph)
     for out_degree in out_degrees:
         graph.nodes[out_degree[0]][NodeAttributes.OUT_DEGREE] = out_degree[1]
