@@ -1,3 +1,6 @@
+SENTIMENT_INTERMEDIATE_NUMBER = 0.2
+
+
 class Messages:
     UID = "uid"
     NAME = "name"

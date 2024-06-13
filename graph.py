@@ -1,5 +1,11 @@
 import networkx as nx
-from constants import Messages, NodeAttributes, EdgeAttributes, GraphAttributes
+from constants import (
+    SENTIMENT_INTERMEDIATE_NUMBER,
+    Messages,
+    NodeAttributes,
+    EdgeAttributes,
+    GraphAttributes,
+)
 from graph_attributes import (
     add_graph_attributes,
 )
@@ -42,9 +48,9 @@ class Graph:
         node[NodeAttributes.SENTIMENT] = round(
             node[NodeAttributes.SENTIMENT_SUM] / node[NodeAttributes.SENTIMENT_COUNT], 2
         )
-        if node[NodeAttributes.SENTIMENT] >= 0.3:
+        if node[NodeAttributes.SENTIMENT] >= SENTIMENT_INTERMEDIATE_NUMBER:
             node[NodeAttributes.COLOR] = "#77bf38"
-        elif node[NodeAttributes.SENTIMENT] <= -0.3:
+        elif node[NodeAttributes.SENTIMENT] <= -SENTIMENT_INTERMEDIATE_NUMBER:
             node[NodeAttributes.COLOR] = "#fb8281"
         else:
             node[NodeAttributes.COLOR] = "#e8e8e8"
@@ -65,9 +71,9 @@ class Graph:
             edge[EdgeAttributes.MESSAGES]
         )
 
-        if edge[EdgeAttributes.SENTIMENT] >= 0.3:
+        if edge[EdgeAttributes.SENTIMENT] >= SENTIMENT_INTERMEDIATE_NUMBER:
             edge[EdgeAttributes.TYPE] = "positive"
-        elif edge[EdgeAttributes.SENTIMENT] <= -0.3:
+        elif edge[EdgeAttributes.SENTIMENT] <= -SENTIMENT_INTERMEDIATE_NUMBER:
             edge[EdgeAttributes.TYPE] = "negative"
         else:
             edge[EdgeAttributes.TYPE] = "natural"
