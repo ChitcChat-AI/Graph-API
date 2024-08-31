@@ -1,5 +1,6 @@
-The ChitChat.AI Graph-API is a API-server created with flask and designed to enable researchers to get relevant results of the experiment he run, it creates a network graph and check for interesting graph attributes for the research to analyze after.
+# About
 
+The ChitChat.AI Graph-API is a API-server created with flask and designed to enable researchers to get relevant results of the experiment he run, it creates a network graph and check for interesting graph attributes for the research to analyze after.
 
 # Installation
 
