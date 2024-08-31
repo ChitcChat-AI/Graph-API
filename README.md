@@ -36,14 +36,13 @@ To install and run, follow these steps:
 
    pip install -r requirements.txt
 
-5. **Set Up Environment Variables**
 
-   Create a .env file in the root directory and add the necessary variables.
-
-6. **Run the Application**
+5. **Run the Application**
 
    python app.py
 
-7. **Access the Application**
+6. **Access the Application**
 
-   To create a graph, you need to make a POST request with the messages formatted correctly in the request body. You can utilize the researcher platform to view the results of an experiment, which will trigger the request with the appropriate data format.
+   ./start.sh
+   
+- To create a graph, you need to make a POST request with the messages formatted correctly in the request body. You can utilize the researcher platform to view the results of an experiment, which will trigger the request with the appropriate data format.
