@@ -29,7 +29,7 @@ To install and run, follow these steps:
       
         on MAC: source venv\bin\activate
       
-        on WINDOWS: source venv\Scripts\activate
+        on WINDOWS: source venv/Scripts/activate
 
 
 4. **Install Dependencies**
