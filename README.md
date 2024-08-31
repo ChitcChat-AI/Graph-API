@@ -39,10 +39,8 @@ To install and run, follow these steps:
 
 5. **Run the Application**
 
-   python app.py
+   ./start.sh
 
 6. **Access the Application**
 
-   ./start.sh
-   
-- To create a graph, you need to make a POST request with the messages formatted correctly in the request body. You can utilize the researcher platform to view the results of an experiment, which will trigger the request with the appropriate data format.
+   To create a graph, you need to make a POST request with the messages formatted correctly in the request body. You can utilize the researcher platform to view the results of an experiment, which will trigger the request with the appropriate data format.
