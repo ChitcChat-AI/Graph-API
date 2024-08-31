@@ -23,9 +23,12 @@ To install and run, follow these steps:
 3. **Set Up a Virtual Environment (optional but recommended)**
     
     - Create a virtual environment to isolate your dependencies:
+      
         python -m venv venv
     - Activate the virtual environment:
+      
         on MAC: source venv\bin\activate
+      
         on WINDOWS: source venv\Scripts\activate
 
 
